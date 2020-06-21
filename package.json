@@ -6,13 +6,36 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/eslint/bin/eslint.js src",
+    "lint-fix": "./node_modules/eslint/bin/eslint.js src --fix"
   },
   "dependencies": {
     "@material-ui/core": "latest",
     "clsx": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "classnames": "latest",
+    "@material-ui/lab": "latest",
+    "@material-ui/icons": "latest",
+    "eslint-config-airbnb": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "prettier": "latest",
+    "prettier-eslint": "latest",
+    "eslint-plugin-jest": "latest"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
