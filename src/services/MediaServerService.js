@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'http://tutubo-media-server.herokuapp.com/',
+  baseURL: process.env.REACT_APP_MEDIA_URI,
 });
 
 export const makePing = async () => {

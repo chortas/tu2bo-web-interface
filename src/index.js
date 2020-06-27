@@ -6,6 +6,8 @@ import App from './App';
 import theme from './theme';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+require('dotenv').config('/.env');
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

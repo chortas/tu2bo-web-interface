@@ -23,7 +23,6 @@
     "@material-ui/icons": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-prettier": "latest",
-    "eslint-plugin-prettier": "latest",
     "prettier": "latest",
     "prettier-eslint": "latest",
     "eslint-plugin-jest": "latest",
@@ -40,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint-plugin-prettier": "^3.1.4"
   }
 }

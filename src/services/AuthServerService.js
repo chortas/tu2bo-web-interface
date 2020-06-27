@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'http://tutubo-auth-server.herokuapp.com/',
+  baseURL: process.env.REACT_APP_AUTH_URI,
 });
 
 export const makePing = async () => {

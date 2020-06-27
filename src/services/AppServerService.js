@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'http://tu2bo-appserver.herokuapp.com/',
+  baseURL: process.env.REACT_APP_APP_URI,
 });
 
 export const makePing = async () => {
