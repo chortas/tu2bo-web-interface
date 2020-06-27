@@ -29,13 +29,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[700],
       },
     },
-    '&:disabled': {
-      backgroundColor: red[700],
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: red[700],
-      },
-    },
   },
 }));
 

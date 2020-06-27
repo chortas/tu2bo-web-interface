@@ -1,22 +1,24 @@
 import React, { useState, useCallback } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { validateCredentials } from '../../utils/login';
 import useStyles from './styles';
 import CustomSnackBar from '../../components/CustomSnackBar';
+import { validateCredentials } from '../../utils/login';
 
-export default function SignIn() {
+export default function SignIn({ loginSuccess }) {
   const classes = useStyles();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
-  const invalidCredentials = !validateCredentials(username, password);
-
   const handleClick = useCallback(() => {
-    setOpenSnackBar(invalidCredentials);
-  }, [invalidCredentials]);
+    const valid = validateCredentials(username, password);
+    if (valid) {
+      loginSuccess();
+    }
+    setOpenSnackBar(!valid);
+  }, [loginSuccess, username, password]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,7 +67,7 @@ export default function SignIn() {
           <CustomSnackBar
             open={openSnackBar}
             setOpenSnackBar={setOpenSnackBar}
-            errorMessage="Invalid credentials"
+            errorMessage="Credenciales inválidas"
             severity="error"
           />
         </form>

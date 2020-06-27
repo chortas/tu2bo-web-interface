@@ -15,6 +15,8 @@
     "clsx": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-router": "latest",
+    "react-router-dom": "latest",
     "react-scripts": "latest",
     "classnames": "latest",
     "@material-ui/lab": "latest",
@@ -24,7 +26,8 @@
     "eslint-plugin-prettier": "latest",
     "prettier": "latest",
     "prettier-eslint": "latest",
-    "eslint-plugin-jest": "latest"
+    "eslint-plugin-jest": "latest",
+    "apisauce": "latest"
   },
   "browserslist": {
     "production": [
