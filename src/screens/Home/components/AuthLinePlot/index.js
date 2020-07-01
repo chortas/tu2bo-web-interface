@@ -20,11 +20,12 @@ export default function AuthLinePlot() {
 
       if (response.ok) {
         setInfo({
-          labels: response.map((item) => item.timestamp),
-          data: response.map((item) => item.num_users),
+          labels: response.data?.map((item) => item?.timestamp),
+          data: response.data?.map((item) => item?.num_users),
         });
       } else {
-        alert('Hubo un error'); // TODO: Maybe use snackbar with error msg
+        // alert('Hubo un error'); // TODO: Maybe use snackbar with error msg
+        console.log('Hubo un error');
       }
     }
     fetchData();
