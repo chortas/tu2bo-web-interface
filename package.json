@@ -11,22 +11,28 @@
     "lint-fix": "./node_modules/eslint/bin/eslint.js src --fix"
   },
   "dependencies": {
+    "@date-io/moment": "^1.3.13",
     "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "latest",
+    "@material-ui/pickers": "^3.2.10",
+    "apisauce": "latest",
+    "chart.js": "^2.9.3",
+    "classnames": "latest",
     "clsx": "latest",
+    "eslint-config-airbnb": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-jest": "latest",
+    "moment": "^2.27.0",
+    "prettier": "latest",
+    "prettier-eslint": "latest",
     "react": "latest",
+    "react-chartjs-2": "^2.9.0",
+    "react-charts": "^2.0.2-next.6",
     "react-dom": "latest",
     "react-router": "latest",
     "react-router-dom": "latest",
-    "react-scripts": "latest",
-    "classnames": "latest",
-    "@material-ui/lab": "latest",
-    "@material-ui/icons": "latest",
-    "eslint-config-airbnb": "latest",
-    "eslint-config-prettier": "latest",
-    "prettier": "latest",
-    "prettier-eslint": "latest",
-    "eslint-plugin-jest": "latest",
-    "apisauce": "latest"
+    "react-scripts": "latest"
   },
   "browserslist": {
     "production": [

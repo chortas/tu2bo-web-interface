@@ -1,10 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import PrivateRoute from './components/PrivateRoute';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import PublicRoute from './components/PublicRoute';
 
 export default function App() {
@@ -19,16 +17,18 @@ export default function App() {
     setIsLoggedIn(true);
   }, []);
 
+  const onLogout = useCallback(() => {
+    window.localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  }, []);
+
   return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <BrowserRouter>
-          <Switch>
-            <PublicRoute path="/login" component={() => SignIn({ loginSuccess })} isLoggedIn={isLoggedIn} />
-            <PrivateRoute path="/home" component={Home} isLoggedIn={isLoggedIn} />
-          </Switch>
-        </BrowserRouter>
-      </Box>
-    </Container>
+    <BrowserRouter>
+      <Switch>
+        <PublicRoute path="/login" component={() => SignIn({ loginSuccess })} isLoggedIn={isLoggedIn} />
+        <PrivateRoute path="/home" component={() => Home({ onLogout })} isLoggedIn={isLoggedIn} />
+        <Redirect to="/home" />
+      </Switch>
+    </BrowserRouter>
   );
 }
