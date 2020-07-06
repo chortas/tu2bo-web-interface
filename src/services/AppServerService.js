@@ -8,3 +8,5 @@ export const makePing = async () => {
   const response = await api.get('/ping');
   return response.ok ? 'Is up' : 'Is Down';
 };
+
+export const getStats = (num) => api.get('/stats', { num });
