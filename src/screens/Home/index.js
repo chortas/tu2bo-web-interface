@@ -22,6 +22,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MediaServerStats from './components/MediaServerStats';
+import VideoEdit from './components/VideoEdit';
 
 export default function Home({ onLogout }) {
   const classes = useStyles();
@@ -39,7 +40,7 @@ export default function Home({ onLogout }) {
 
   const onClickHome = useCallback(async () => {
     setItemSelected(<Pings />);
-  }, []);  
+  }, []);
 
   const onClickAppServerStats = useCallback(async () => {
     setItemSelected(<AppServerStats />);
@@ -59,8 +60,7 @@ export default function Home({ onLogout }) {
   }, []);
 
   const onClickVideoAdmin = useCallback(async () => {
-    // TODO: Add video admin
-    setItemSelected(null);
+    setItemSelected(<VideoEdit />);
   }, []);
 
   return (

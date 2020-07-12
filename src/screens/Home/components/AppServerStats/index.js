@@ -57,6 +57,7 @@ export default function AppServerStats() {
             description={video.description}
             url={video.url}
             loading={loading}
+            visibility={video.visiblity}
           />
         ))}
       </Grid>
@@ -74,6 +75,7 @@ export default function AppServerStats() {
             description={video.description}
             url={video.url}
             loading={loading}
+            visibility={video.visiblity}
           />
         ))}
       </Grid>

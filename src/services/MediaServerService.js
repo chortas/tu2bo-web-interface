@@ -12,3 +12,7 @@ export const makePing = async () => {
 export const getStats = (date) => api.get('/stats/historic_count', { date });
 
 export const getVisibilityStats = () => api.get('/stats/visibility', {});
+
+export const getVideos = () => api.get('/videos', {});
+
+export const deleteVideo = (id) => api.delete(`/videos/${id}`, {});

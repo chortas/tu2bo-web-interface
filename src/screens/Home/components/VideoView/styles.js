@@ -5,7 +5,17 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: red[700],
   },
+  icon: {
+    color: red[700],
+    fontSize: '30px',
+  },
+  container: {
+    marginLeft: '10px',
+    width: '30px',
+    height: '30px',
+  },
   card: {
+    marginBottom: '50px',
     width: '400px',
     height: '400px',
   },
@@ -23,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: red[700],
     },
+    marginRight: '10px',
   },
   circularProgress: {
     color: red[700],
