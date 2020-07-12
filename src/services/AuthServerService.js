@@ -9,4 +9,4 @@ export const makePing = async () => {
   return response.ok ? 'Is up' : 'Is Down';
 };
 
-export const getStats = (timestamp) => api.get('/stats', { timestamp });
+export const getStats = (date) => api.get('/stats', { date });

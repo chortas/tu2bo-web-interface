@@ -27,22 +27,24 @@ export default function AppServerStats() {
 
   return (
     <Container className={classes.container}>
-      <h2>Estadísticas del App Server</h2>
-      <span className={classes.titleParams}>Parámetros:</span>
-      <div className={classes.param}>
-        <span>Cantidad requerida de videos</span>
-        <Input
-          native
-          type="number"
-          inputProps={{ min: 1 }}
-          value={numVideos}
-          onChange={(event) => {
-            setNumVideos(event.target.value);
-          }}
-        />
-      </div>
+      <Typography variant="h4" gutterBottom className={classes.title}>
+        Estadísticas del App Server
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Cantidad requerida de videos
+      </Typography>
+      <Input
+        className={classes.titleParams}
+        native
+        type="number"
+        inputProps={{ min: 1 }}
+        value={numVideos}
+        onChange={(event) => {
+          setNumVideos(event.target.value);
+        }}
+      />
 
-      <Typography variant="subtitle1" color="secondary" className={classes.titleVideos}>
+      <Typography variant="h6" color="secondary" className={classes.titleVideos}>
         {getTitle(numVideos, 'likeado')}
       </Typography>
 
@@ -59,7 +61,7 @@ export default function AppServerStats() {
         ))}
       </Grid>
 
-      <Typography variant="subtitle1" color="secondary" className={classes.titleVideos}>
+      <Typography variant="h6" color="secondary" className={classes.titleVideos}>
         {getTitle(numVideos, 'comentado')}
       </Typography>
 

@@ -21,22 +21,25 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MediaServerStats from './components/MediaServerStats';
 
 export default function Home({ onLogout }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [itemSelected, setItemSelected] = useState(null);
+  const [itemSelected, setItemSelected] = useState(<Pings />);
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    setItemSelected(null);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
-    setItemSelected(null);
   };
+
+  const onClickHome = useCallback(async () => {
+    setItemSelected(<Pings />);
+  }, []);  
 
   const onClickAppServerStats = useCallback(async () => {
     setItemSelected(<AppServerStats />);
@@ -47,8 +50,7 @@ export default function Home({ onLogout }) {
   }, []);
 
   const onClickMediaServerStats = useCallback(async () => {
-    // TODO: Add plot
-    setItemSelected(null);
+    setItemSelected(<MediaServerStats />);
   }, []);
 
   const onClickUserAdmin = useCallback(async () => {
@@ -113,6 +115,9 @@ export default function Home({ onLogout }) {
         <Button variant="outlined" color="secondary" onClick={onLogout} className={classes.button}>
           Logout
         </Button>
+        <Button variant="outlined" color="secondary" onClick={onClickHome} className={classes.button}>
+          Inicio Tutubo Backoffice
+        </Button>
         <List />
       </Drawer>
       <main
@@ -121,10 +126,7 @@ export default function Home({ onLogout }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Container>
-          <Pings />
-          {itemSelected != null ? itemSelected : <div> </div>}
-        </Container>
+        <Container>{itemSelected != null ? itemSelected : <div> </div>}</Container>
       </main>
     </div>
   );
