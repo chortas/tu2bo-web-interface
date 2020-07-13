@@ -8,7 +8,6 @@ import {
   CardMedia,
   Typography,
   Button,
-  CircularProgress,
   Container,
   Tooltip,
 } from '@material-ui/core';
@@ -17,22 +16,10 @@ import { getDescription } from 'utils/description';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-export default function VideoView({
-  title,
-  thumb,
-  description,
-  url,
-  id,
-  loading,
-  edit,
-  deleteVideo,
-  visibility,
-}) {
+export default function VideoView({ title, thumb, description, url, id, edit, deleteVideo, visibility }) {
   const classes = useStyles();
 
-  return loading ? (
-    <CircularProgress size={20} color="secondary" className={classes.circularProgress} />
-  ) : (
+  return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia className={classes.cardMedia} image={thumb} title="Video" />
@@ -49,7 +36,7 @@ export default function VideoView({
         <Button target="_blank" href={url} variant="outlined" color="secondary" className={classes.button}>
           Ver video
         </Button>
-        {edit ? <DeleteButton deleteVideo={deleteVideo} id={id} title={title} /> : <div> </div>}
+        {edit && <DeleteButton deleteCallback={deleteVideo} id={id} title={title} identifier="video" />}
         {visibility === 'private' ? (
           <Container className={classes.container}>
             <Tooltip title="Video privado">

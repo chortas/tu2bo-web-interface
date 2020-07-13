@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useStyles from './styles';
 import { Container, Grid, Typography, CircularProgress } from '@material-ui/core';
-import { getVideos, deleteVideo as deleteVideoMediaServer } from 'services/MediaServerService';
-import VideoView from 'components/VideoView';
+import { getUsers } from 'services/AuthServerService';
+import { deleteUser as deleteUserAppServer } from 'services/AppServerService';
+import UserView from 'components/UserView';
+import { getProfilePic } from 'utils/profilePic';
 
-export default function VideoEdit() {
+export default function UserEdit() {
   const classes = useStyles();
-  const [videos, setVideos] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   async function fetchData() {
     setLoading(true);
-    const response = await getVideos();
+    const response = await getUsers();
     if (response.ok) {
-      setVideos(response.data);
+      setUsers(response.data);
     }
     setLoading(false);
   }
 
-  const deleteVideo = useCallback(async (id) => {
-    const response = await deleteVideoMediaServer(id);
+  const deleteUser = useCallback(async (id) => {
+    const response = await deleteUserAppServer(id);
     if (response.ok) {
       fetchData();
     }
@@ -32,23 +34,20 @@ export default function VideoEdit() {
   return (
     <Container className={classes.container}>
       <Typography variant="h4" gutterBottom className={classes.title}>
-        Administrar videos
+        Administrar usuarios
       </Typography>
       {loading ? (
         <CircularProgress size={40} className={classes.circularProgress} />
       ) : (
         <Grid container direction="row" alignItems="center" className={classes.grid}>
-          {videos.map((video) => (
-            <VideoView
-              key={video.id}
-              title={video.title}
-              thumb={video.thumb}
-              description={video.description}
-              url={video.url}
-              id={video.id}
-              deleteVideo={deleteVideo}
-              edit
-              visibility={video.visibility}
+          {users.map((user) => (
+            <UserView
+              key={user.id}
+              username={user.username}
+              email={user.email}
+              id={user.id}
+              profilePic={getProfilePic(user.profile.picture)}
+              deleteUser={deleteUser}
             />
           ))}
         </Grid>

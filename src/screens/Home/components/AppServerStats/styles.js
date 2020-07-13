@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     margin: '50px',
     marginTop: theme.spacing(1),
-    padding: theme.spacing(3),
   },
   titleVideos: {
     marginTop: theme.spacing(8),
@@ -22,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(7),
+  },
+  circularProgress: {
+    marginLeft: '40px',
+    marginTop: '25px',
+    color: red[700],
   },
 }));
 

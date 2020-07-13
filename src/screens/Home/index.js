@@ -5,7 +5,7 @@ import { useTheme } from '@material-ui/core/styles';
 import Pings from './components/Pings';
 import AuthLinePlot from './components/AuthLinePlot';
 import AppServerStats from './components/AppServerStats';
-import ListItemDrawer from './components/ListItemDrawer';
+import ListItemDrawer from 'components/ListItemDrawer';
 import {
   Button,
   Drawer,
@@ -23,6 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MediaServerStats from './components/MediaServerStats';
 import VideoEdit from './components/VideoEdit';
+import UserEdit from './components/UserEdit';
 
 export default function Home({ onLogout }) {
   const classes = useStyles();
@@ -55,8 +56,7 @@ export default function Home({ onLogout }) {
   }, []);
 
   const onClickUserAdmin = useCallback(async () => {
-    // TODO: Add user admin
-    setItemSelected(null);
+    setItemSelected(<UserEdit />);
   }, []);
 
   const onClickVideoAdmin = useCallback(async () => {

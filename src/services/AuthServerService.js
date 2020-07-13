@@ -10,3 +10,5 @@ export const makePing = async () => {
 };
 
 export const getStats = (date) => api.get('/stats', { date });
+
+export const getUsers = () => api.get('/users');

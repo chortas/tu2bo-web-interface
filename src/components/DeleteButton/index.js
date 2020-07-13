@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function DeleteButton({ id, deleteVideo, title }) {
+export default function DeleteButton({ id, deleteCallback, title, identifier }) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -21,14 +21,14 @@ export default function DeleteButton({ id, deleteVideo, title }) {
   }, []);
 
   const onClickAgree = useCallback(() => {
-    deleteVideo(id);
+    deleteCallback(id);
     setOpen(false);
-  }, [deleteVideo, id]);
+  }, [deleteCallback, id]);
 
   return (
     <div>
       <Button variant="outlined" onClick={() => handleClickOpen()} className={classes.button}>
-        Borrar video
+        {`Borrar ${identifier}`}
       </Button>
       <Dialog
         open={open}
@@ -36,10 +36,10 @@ export default function DeleteButton({ id, deleteVideo, title }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{`¿Desea borrar el video "${title}"?`}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{`¿Desea borrar el ${identifier} "${title}"?`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            El video se borrará permanentemente
+            {`El ${identifier} se borrará permanentemente`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

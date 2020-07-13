@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
-import { Input, Container, Grid, Typography } from '@material-ui/core';
+import { Input, Container, Grid, Typography, CircularProgress } from '@material-ui/core';
 import { getStats as getAppServerStats } from 'services/AppServerService';
-import VideoView from '../VideoView';
+import VideoView from 'components/VideoView';
 import { getTitle } from 'utils/title';
 
 export default function AppServerStats() {
@@ -47,17 +47,18 @@ export default function AppServerStats() {
       <Typography variant="h6" color="secondary" className={classes.titleVideos}>
         {getTitle(numVideos, 'likeado')}
       </Typography>
+      {loading && <CircularProgress size={30} className={classes.circularProgress} />}
 
-      <Grid container direction="row" justify="space-between" alignItems="center" className={classes.grid}>
+      <Grid container direction="row" alignItems="center" className={classes.grid}>
         {mostLikedVideos.map((video) => (
-          // eslint-disable-next-line react/jsx-key
           <VideoView
+            key={video.id}
             title={video.title}
             thumb={video.thumb}
             description={video.description}
             url={video.url}
             loading={loading}
-            visibility={video.visiblity}
+            visibility={video.visibility}
           />
         ))}
       </Grid>
@@ -65,11 +66,12 @@ export default function AppServerStats() {
       <Typography variant="h6" color="secondary" className={classes.titleVideos}>
         {getTitle(numVideos, 'comentado')}
       </Typography>
+      {loading && <CircularProgress size={30} className={classes.circularProgress} />}
 
-      <Grid container direction="row" justify="space-between" alignItems="center" className={classes.grid}>
+      <Grid container direction="row" alignItems="center" className={classes.grid}>
         {mostCommentedVideos.map((video) => (
-          // eslint-disable-next-line react/jsx-key
           <VideoView
+            key={video.id}
             title={video.title}
             thumb={video.thumb}
             description={video.description}

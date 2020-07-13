@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '20px',
   },
   grid: {
-    margin: '25px',
+    margin: '50px',
     marginTop: theme.spacing(1),
   },
   titleVideos: {
