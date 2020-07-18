@@ -1,16 +1,13 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import PrivateRoute from './components/PrivateRoute';
-import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import PublicRoute from './components/PublicRoute';
+import { ROUTES } from 'constants/routes';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    setIsLoggedIn(window.localStorage.getItem('isLoggedIn'));
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(window.localStorage.getItem('isLoggedIn'));
 
   const loginSuccess = useCallback(() => {
     window.localStorage.setItem('isLoggedIn', true);
@@ -26,8 +23,16 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         <PublicRoute path="/login" component={() => SignIn({ loginSuccess })} isLoggedIn={isLoggedIn} />
-        <PrivateRoute path="/home" component={() => Home({ onLogout })} isLoggedIn={isLoggedIn} />
-        <Redirect to="/home" />
+        {Object.values(ROUTES).map((route) => {
+          return (
+            <PrivateRoute
+              key={route.path}
+              path={route.path}
+              component={() => Home({ onLogout, itemSelected: route.component })}
+              isLoggedIn={isLoggedIn}
+            />
+          );
+        })}
       </Switch>
     </BrowserRouter>
   );

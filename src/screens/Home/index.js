@@ -1,10 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
-import Pings from './components/Pings';
-import AuthLinePlot from './components/AuthLinePlot';
-import AppServerStats from './components/AppServerStats';
 import ListItemDrawer from 'components/ListItemDrawer';
 import {
   Button,
@@ -21,15 +18,13 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MediaServerStats from './components/MediaServerStats';
-import VideoEdit from './components/VideoEdit';
-import UserEdit from './components/UserEdit';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'constants/routes';
 
-export default function Home({ onLogout }) {
+export default function Home({ onLogout, itemSelected }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [itemSelected, setItemSelected] = useState(<Pings />);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -38,30 +33,6 @@ export default function Home({ onLogout }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const onClickHome = useCallback(async () => {
-    setItemSelected(<Pings />);
-  }, []);
-
-  const onClickAppServerStats = useCallback(async () => {
-    setItemSelected(<AppServerStats />);
-  }, []);
-
-  const onClickAuthServerStats = useCallback(async () => {
-    setItemSelected(<AuthLinePlot />);
-  }, []);
-
-  const onClickMediaServerStats = useCallback(async () => {
-    setItemSelected(<MediaServerStats />);
-  }, []);
-
-  const onClickUserAdmin = useCallback(async () => {
-    setItemSelected(<UserEdit />);
-  }, []);
-
-  const onClickVideoAdmin = useCallback(async () => {
-    setItemSelected(<VideoEdit />);
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -103,19 +74,25 @@ export default function Home({ onLogout }) {
         </div>
         <Divider />
         <List>
-          <ListItemDrawer title="Estadísticas app server" onClick={onClickAppServerStats} />
-          <ListItemDrawer title="Estadísticas auth server" onClick={onClickAuthServerStats} />
-          <ListItemDrawer title="Estadísticas media server" onClick={onClickMediaServerStats} />
+          <ListItemDrawer title="Estadísticas app server" path={ROUTES.StatsAppServer.path} />
+          <ListItemDrawer title="Estadísticas auth server" path={ROUTES.StatsAuthServer.path} />
+          <ListItemDrawer title="Estadísticas media server" path={ROUTES.StatsMediaServer.path} />
         </List>
         <Divider />
         <List>
-          <ListItemDrawer title="Administrar usuarios" onClick={onClickUserAdmin} />
-          <ListItemDrawer title="Administrar videos" onClick={onClickVideoAdmin} />
+          <ListItemDrawer title="Administrar usuarios" path={ROUTES.UserEdit.path} />
+          <ListItemDrawer title="Administrar videos" path={ROUTES.VideoEdit.path} />
         </List>
         <Button variant="outlined" color="secondary" onClick={onLogout} className={classes.button}>
           Logout
         </Button>
-        <Button variant="outlined" color="secondary" onClick={onClickHome} className={classes.button}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          className={classes.button}
+          component={Link}
+          to={ROUTES.Home.path}
+        >
           Inicio Tutubo Backoffice
         </Button>
         <List />
@@ -126,7 +103,7 @@ export default function Home({ onLogout }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Container>{itemSelected != null ? itemSelected : <div> </div>}</Container>
+        <Container>{itemSelected}</Container>
       </main>
     </div>
   );
