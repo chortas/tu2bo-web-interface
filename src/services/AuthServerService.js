@@ -12,3 +12,7 @@ export const makePing = async () => {
 export const getStats = (date) => api.get('/stats', { date });
 
 export const getUsers = () => api.get('/users');
+
+export const blockUser = (id) => api.post(`/users/${id}/blocked`);
+
+export const unblockUser = (id) => api.delete(`/users/${id}/blocked`);

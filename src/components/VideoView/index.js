@@ -12,11 +12,24 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import DeleteButton from 'components/DeleteButton';
+import BlockButton from 'components/BlockButton';
 import { getDescription } from 'utils/description';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-export default function VideoView({ title, thumb, description, url, id, edit, deleteVideo, visibility }) {
+export default function VideoView({
+  title,
+  thumb,
+  description,
+  url,
+  id,
+  edit,
+  deleteVideo,
+  visibility,
+  blockVideo,
+  unblockVideo,
+  isBlocked,
+}) {
   const classes = useStyles();
 
   return (
@@ -34,9 +47,19 @@ export default function VideoView({ title, thumb, description, url, id, edit, de
       </CardActionArea>
       <CardActions>
         <Button target="_blank" href={url} variant="outlined" color="secondary" className={classes.button}>
-          Ver video
+          Ver
         </Button>
         {edit && <DeleteButton deleteCallback={deleteVideo} id={id} title={title} identifier="video" />}
+        {edit && (
+          <BlockButton
+            id={id}
+            title={title}
+            identifier="video"
+            blockCallback={blockVideo}
+            unblockCallback={unblockVideo}
+            isBlocked={isBlocked}
+          />
+        )}
         {visibility === 'private' ? (
           <Container className={classes.container}>
             <Tooltip title="Video privado">

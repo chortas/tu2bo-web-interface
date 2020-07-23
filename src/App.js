@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import PrivateRoute from './components/PrivateRoute';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import PublicRoute from './components/PublicRoute';
 import { ROUTES } from 'constants/routes';
 
@@ -33,6 +33,7 @@ export default function App() {
             />
           );
         })}
+        <Redirect to="/home" />
       </Switch>
     </BrowserRouter>
   );

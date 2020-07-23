@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useStyles from './styles';
 import { Container, Grid, Typography, CircularProgress } from '@material-ui/core';
-import { getUsers } from 'services/AuthServerService';
+import {
+  getUsers,
+  blockUser as blockUserAuthServer,
+  unblockUser as unblockUserAuthServer,
+} from 'services/AuthServerService';
 import { deleteUser as deleteUserAppServer } from 'services/AppServerService';
 import UserView from 'components/UserView';
 import { getProfilePic } from 'utils/profilePic';
@@ -37,6 +41,26 @@ export default function UserEdit() {
     [fetchData]
   );
 
+  const blockUser = useCallback(
+    async (id) => {
+      const response = await blockUserAuthServer(id);
+      if (response.ok) {
+        fetchData();
+      }
+    },
+    [fetchData]
+  );
+
+  const unblockUser = useCallback(
+    async (id) => {
+      const response = await unblockUserAuthServer(id);
+      if (response.ok) {
+        fetchData();
+      }
+    },
+    [fetchData]
+  );
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -62,6 +86,9 @@ export default function UserEdit() {
               id={user.id}
               profilePic={getProfilePic(user.profile.picture)}
               deleteUser={deleteUser}
+              blockUser={blockUser}
+              unblockUser={unblockUser}
+              isBlocked={user.is_blocked}
             />
           ))}
         </Grid>

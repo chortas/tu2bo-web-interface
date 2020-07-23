@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useStyles from './styles';
 import { Container, Grid, Typography, CircularProgress } from '@material-ui/core';
-import { getVideos, deleteVideo as deleteVideoMediaServer } from 'services/MediaServerService';
+import {
+  getVideos,
+  deleteVideo as deleteVideoMediaServer,
+  blockVideo as blockVideoMediaServer,
+  unblockVideo as unblockVideoMediaServer,
+} from 'services/MediaServerService';
 import VideoView from 'components/VideoView';
 import { filterVideos } from 'utils/filterVideos';
 import SearchBar from 'components/SearchBar';
@@ -35,6 +40,26 @@ export default function VideoEdit() {
     [fetchData]
   );
 
+  const blockVideo = useCallback(
+    async (id) => {
+      const response = await blockVideoMediaServer(id);
+      if (response.ok) {
+        fetchData();
+      }
+    },
+    [fetchData]
+  );
+
+  const unblockVideo = useCallback(
+    async (id) => {
+      const response = await unblockVideoMediaServer(id);
+      if (response.ok) {
+        fetchData();
+      }
+    },
+    [fetchData]
+  );
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -56,13 +81,16 @@ export default function VideoEdit() {
             <VideoView
               key={video.id}
               title={video.title}
-              thumb={video.thumb}
-              description={video.description}
               url={video.url}
               id={video.id}
+              thumb={video.thumb}
+              description={video.description}
               deleteVideo={deleteVideo}
               edit
               visibility={video.visibility}
+              blockVideo={blockVideo}
+              unblockVideo={unblockVideo}
+              isBlocked={video.is_blocked}
             />
           ))}
         </Grid>

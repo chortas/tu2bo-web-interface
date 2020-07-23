@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import useStyles from './styles';
 import { Pie } from 'react-chartjs-2';
-import { getVisibilityStats as getMediaStats } from 'services/MediaServerService';
 
-export default function PieStatistics() {
+export default function PieStatistics({ labelsGraph, dataGraph }) {
   const classes = useStyles();
 
-  const [info, setInfo] = useState([1, 1]);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getMediaStats();
-
-      if (response.ok) {
-        setInfo([response.data.public, response.data.private]);
-      }
-    }
-    fetchData();
-  }, []);
-
   const data = {
-    labels: ['Publico', 'Privado'],
+    labels: labelsGraph,
     datasets: [
       {
-        data: info,
+        data: dataGraph,
         backgroundColor: ['#D62728', '#FFCE56'],
         hoverBackgroundColor: ['#D62728', '#FFCE56'],
         labels: {
@@ -34,7 +21,7 @@ export default function PieStatistics() {
 
   return (
     <div className={classes.chart}>
-      <h2>Videos públicos vs videos privados</h2>
+      <h2>{`${labelsGraph[0]} vs ${labelsGraph[1].toLowerCase()}`}</h2>
       <Pie data={data} />
     </div>
   );

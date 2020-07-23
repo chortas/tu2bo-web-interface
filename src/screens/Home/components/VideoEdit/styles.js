@@ -3,7 +3,7 @@ import red from '@material-ui/core/colors/red';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '50px',
+    padding: '0px',
     margin: theme.spacing(1),
   },
   titleParams: {

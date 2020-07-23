@@ -16,3 +16,7 @@ export const getVisibilityStats = () => api.get('/stats/visibility', {});
 export const getVideos = () => api.get('/videos', {});
 
 export const deleteVideo = (id) => api.delete(`/videos/${id}`, {});
+
+export const blockVideo = (id) => api.post(`/videos/${id}/blocked`);
+
+export const unblockVideo = (id) => api.delete(`/videos/${id}/blocked`);

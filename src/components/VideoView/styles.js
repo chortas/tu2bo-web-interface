@@ -10,22 +10,22 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '30px',
   },
   container: {
-    paddingLeft: '10px',
+    paddingLeft: '5px',
     marginLeft: '10px',
     width: '30px',
     height: '30px',
   },
   card: {
     margin: '20px',
-    width: '320px',
-    height: '350px',
+    width: '360px',
+    height: '370px',
   },
   cardMedia: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width: '320px',
-    height: '200px',
+    width: '360px',
+    height: '220px',
     padding: '20px',
   },
   button: {

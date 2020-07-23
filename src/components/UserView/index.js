@@ -10,8 +10,19 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import DeleteButton from 'components/DeleteButton';
+import BlockButton from 'components/BlockButton';
 
-export default function UserView({ username, email, id, profilePic, loading, deleteUser }) {
+export default function UserView({
+  username,
+  email,
+  id,
+  profilePic,
+  loading,
+  deleteUser,
+  blockUser,
+  unblockUser,
+  isBlocked,
+}) {
   const classes = useStyles();
 
   return loading ? (
@@ -31,6 +42,14 @@ export default function UserView({ username, email, id, profilePic, loading, del
       </CardActionArea>
       <CardActions>
         <DeleteButton deleteCallback={deleteUser} id={id} title={username} identifier="usuario" />
+        <BlockButton
+          id={id}
+          title={username}
+          identifier="usuario"
+          blockCallback={blockUser}
+          unblockCallback={unblockUser}
+          isBlocked={isBlocked}
+        />
       </CardActions>
     </Card>
   );
