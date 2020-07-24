@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
 
 const useStyles = makeStyles(() => ({
   plotContainer: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
   },
   circularProgress: {
-    color: red[700],
+    color: '#d32f2f !important',
     marginLeft: '50px',
   },
 }));
