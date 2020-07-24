@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
-import { Select, Input } from '@material-ui/core';
-import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { Select, Input, CircularProgress } from '@material-ui/core';
 import LineTemporalPlot from 'components/LineTemporalPlot';
+import DatePicker from 'components/DatePicker';
 import { DATE_FORMAT } from 'utils/date';
+import moment from 'moment';
 
 export default function StatisticsLinePlot({ getStats, statisticsTitle, title, label }) {
   const classes = useStyles();
-  const [dateSelected, setDateSelected] = useState('01/01/20 00:00:00');
-  const [unit, setUnit] = useState('second');
-  const [unitSize, setUnitSize] = useState(10);
-
+  const [initialDateSelected, setInitialDateSelected] = useState('01/01/20 00:00:00');
+  const [finalDateSelected, setFinalDateSelected] = useState(moment().format(DATE_FORMAT));
+  const [unit, setUnit] = useState('day');
+  const [unitSize, setUnitSize] = useState(1);
   const [info, setInfo] = useState({ labels: [], data: [] });
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
-      const response = await getStats(dateSelected);
+      setLoading(true);
+      const response = await getStats(initialDateSelected, finalDateSelected);
+      setLoading(false);
 
       if (response.ok) {
         setInfo({
@@ -25,9 +29,11 @@ export default function StatisticsLinePlot({ getStats, statisticsTitle, title, l
       }
     }
     fetchData();
-  }, [dateSelected, getStats]);
+  }, [initialDateSelected, getStats, finalDateSelected]);
 
-  return (
+  return loading ? (
+    <CircularProgress size={30} color="secondary" className={classes.circularProgress} />
+  ) : (
     <div className={classes.container}>
       <h2>{statisticsTitle}</h2>
       <div className={classes.plotContainer}>
@@ -35,17 +41,11 @@ export default function StatisticsLinePlot({ getStats, statisticsTitle, title, l
           <span className={classes.titleParams}>Parámetros:</span>
           <div className={classes.param}>
             <span>Fecha de inicio</span>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-              <DateTimePicker
-                disableFuture
-                value={dateSelected}
-                ampm={false}
-                onChange={(date) => {
-                  setDateSelected(date.format(DATE_FORMAT));
-                }}
-                format={DATE_FORMAT}
-              />
-            </MuiPickersUtilsProvider>
+            <DatePicker setDate={setInitialDateSelected} dateSelected={initialDateSelected} />
+          </div>
+          <div className={classes.param}>
+            <span>Fecha de fin</span>
+            <DatePicker setDate={setFinalDateSelected} dateSelected={finalDateSelected} />
           </div>
           <div className={classes.param}>
             <span>Unidad</span>
@@ -56,18 +56,12 @@ export default function StatisticsLinePlot({ getStats, statisticsTitle, title, l
                 setUnit(event.target.value);
               }}
             >
-              <option value="second">Segundo</option>
-              <option value="minute">Minuto</option>
-              <option value="hour">Hora</option>
               <option value="day">Día</option>
-              <option value="week">Semana</option>
-              <option value="month">Mes</option>
             </Select>
           </div>
           <div className={classes.param}>
             <span>Tamaño del paso</span>
             <Input
-              native
               type="number"
               inputProps={{ min: 1 }}
               value={unitSize}

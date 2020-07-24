@@ -8,7 +8,7 @@ export default function AuthLinePlot() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container}>
+    <Container>
       <Typography variant="h4" gutterBottom className={classes.title}>
         Estadísticas del Auth Server
       </Typography>

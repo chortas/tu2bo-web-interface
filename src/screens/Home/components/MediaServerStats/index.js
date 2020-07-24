@@ -12,10 +12,13 @@ export default function MediaServerStats() {
   const labelsPrivatePublic = ['Videos públicos', 'Videos privados'];
   const [infoBlockedNotBlocked, setInfoBlockedNotBlocked] = useState([1, 1]);
   const labelsBlockedNotBlocked = ['Videos bloqueados', 'Videos no bloqueados'];
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const response = await getMediaStats();
+      setLoading(false);
 
       if (response.ok) {
         setInfoPrivatePublic([response.data.public, response.data.private]);
@@ -29,13 +32,17 @@ export default function MediaServerStats() {
   }, []);
 
   return (
-    <Container className={classes.container}>
+    <Container>
       <Typography variant="h4" gutterBottom className={classes.title}>
         Estadísticas del Media Server
       </Typography>
       <MediaLinePlot />
-      <PieStatistics labelsGraph={labelsPrivatePublic} dataGraph={infoPrivatePublic} />
-      <PieStatistics labelsGraph={labelsBlockedNotBlocked} dataGraph={infoBlockedNotBlocked} />
+      <PieStatistics labelsGraph={labelsPrivatePublic} dataGraph={infoPrivatePublic} loading={loading} />
+      <PieStatistics
+        labelsGraph={labelsBlockedNotBlocked}
+        dataGraph={infoBlockedNotBlocked}
+        loading={loading}
+      />
     </Container>
   );
 }

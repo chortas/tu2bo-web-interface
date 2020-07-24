@@ -30,6 +30,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-charts": "^2.0.2-next.6",
     "react-dom": "latest",
+    "react-moment": "^0.9.7",
     "react-router": "latest",
     "react-router-dom": "latest",
     "react-scripts": "latest"

@@ -9,7 +9,8 @@ export const makePing = async () => {
   return response.ok ? 'Is up' : 'Is Down';
 };
 
-export const getStats = (date) => api.get('/stats/historic_count', { date });
+export const getStats = (initialDate, finalDate) =>
+  api.get('/stats/historic_count', { initial_date: initialDate, final_date: finalDate });
 
 export const getVisibilityStats = () => api.get('/stats/visibility', {});
 
