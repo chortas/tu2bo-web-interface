@@ -43,19 +43,35 @@ export default function Home({ onLogout, itemSelected }) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Tutubo Backoffice
-          </Typography>
+        <Toolbar className={classes.header}>
+          <div className={classes.left}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Tutubo Backoffice
+            </Typography>
+          </div>
+          <div>
+            <Button
+              variant="outlined"
+              color="secondary"
+              className={classes.button}
+              component={Link}
+              to={ROUTES.Home.path}
+            >
+              Inicio
+            </Button>
+            <Button variant="outlined" color="secondary" onClick={onLogout} className={classes.button}>
+              Logout
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -83,18 +99,6 @@ export default function Home({ onLogout, itemSelected }) {
           <ListItemDrawer title="Administrar usuarios" path={ROUTES.UserEdit.path} />
           <ListItemDrawer title="Administrar videos" path={ROUTES.VideoEdit.path} />
         </List>
-        <Button variant="outlined" color="secondary" onClick={onLogout} className={classes.button}>
-          Logout
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          className={classes.button}
-          component={Link}
-          to={ROUTES.Home.path}
-        >
-          Inicio Tutubo Backoffice
-        </Button>
         <List />
       </Drawer>
       <main

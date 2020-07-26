@@ -7,6 +7,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  left: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   appBar: {
     backgroundColor: '#d32f2f !important',
     transition: theme.transitions.create(['margin', 'width'], {
@@ -67,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
+    marginLeft: '10px',
   },
 }));
 
