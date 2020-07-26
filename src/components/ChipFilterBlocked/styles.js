@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -20,13 +20,6 @@ const useStyles = makeStyles((theme) => ({
     borderColor: '#d32f2f !important',
     marginLeft: '10px',
     fontSize: '17px !important',
-  },
-  chipNotSelected: {
-    color: red[700],
-    borderColor: red[700],
-    marginLeft: '10px',
-    fontSize: '17px',
-    backgroundColor: 'transparent !important',
   },
 }));
 
