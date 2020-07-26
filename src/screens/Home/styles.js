@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
   button: {
-    color: '#fff',
+    color: theme.palette.getContrastText(red[700]),
     backgroundColor: '#d32f2f',
     '&:hover': {
       backgroundColor: red[700],

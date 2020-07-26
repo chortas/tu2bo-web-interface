@@ -11,12 +11,16 @@ import UserView from 'components/UserView';
 import { getProfilePic } from 'utils/profilePic';
 import { filterUsers } from 'utils/filterUsers';
 import SearchBar from 'components/SearchBar';
+import ChipFilterBlocked from 'components/ChipFilterBlocked';
 
 export default function UserEdit() {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const [selectedBlocked, setSelectedBlocked] = useState(true);
+  const [selectedNotBlocked, setSelectedNotBlocked] = useState(true);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -73,24 +77,33 @@ export default function UserEdit() {
         Administrar usuarios
       </Typography>
       <SearchBar fetchData={fetchDataFiltered} searchValue="nombre" />
+      <ChipFilterBlocked
+        selectedBlocked={selectedBlocked}
+        selectedNotBlocked={selectedNotBlocked}
+        setSelectedBlocked={setSelectedBlocked}
+        setSelectedNotBlocked={setSelectedNotBlocked}
+      />
 
       {loading ? (
         <CircularProgress size={40} className={classes.circularProgress} />
       ) : (
         <Grid container direction="row" alignItems="center" className={classes.grid}>
-          {usersFiltered.map((user) => (
-            <UserView
-              key={user.id}
-              username={user.username}
-              email={user.email}
-              id={user.id}
-              profilePic={getProfilePic(user.profile.picture)}
-              deleteUser={deleteUser}
-              blockUser={blockUser}
-              unblockUser={unblockUser}
-              isBlocked={user.is_blocked}
-            />
-          ))}
+          {usersFiltered.map(
+            (user) =>
+              ((user.is_blocked && selectedBlocked) || (!user.is_blocked && selectedNotBlocked)) && (
+                <UserView
+                  key={user.id}
+                  username={user.username}
+                  email={user.email}
+                  id={user.id}
+                  profilePic={getProfilePic(user.profile.picture)}
+                  deleteUser={deleteUser}
+                  blockUser={blockUser}
+                  unblockUser={unblockUser}
+                  isBlocked={user.is_blocked}
+                />
+              )
+          )}
         </Grid>
       )}
     </Container>

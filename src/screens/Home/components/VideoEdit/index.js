@@ -10,12 +10,16 @@ import {
 import VideoView from 'components/VideoView';
 import { filterVideos } from 'utils/filterVideos';
 import SearchBar from 'components/SearchBar';
+import ChipFilterBlocked from 'components/ChipFilterBlocked';
 
 export default function VideoEdit() {
   const classes = useStyles();
   const [videos, setVideos] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const [selectedBlocked, setSelectedBlocked] = useState(true);
+  const [selectedNotBlocked, setSelectedNotBlocked] = useState(true);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -72,27 +76,36 @@ export default function VideoEdit() {
         Administrar videos
       </Typography>
       <SearchBar fetchData={fetchDataFiltered} searchValue="título" />
+      <ChipFilterBlocked
+        selectedBlocked={selectedBlocked}
+        selectedNotBlocked={selectedNotBlocked}
+        setSelectedBlocked={setSelectedBlocked}
+        setSelectedNotBlocked={setSelectedNotBlocked}
+      />
 
       {loading ? (
         <CircularProgress size={40} className={classes.circularProgress} />
       ) : (
         <Grid container direction="row" alignItems="center" className={classes.grid}>
-          {videosFiltered.map((video) => (
-            <VideoView
-              key={video.id}
-              title={video.title}
-              url={video.url}
-              id={video.id}
-              thumb={video.thumb}
-              description={video.description}
-              deleteVideo={deleteVideo}
-              edit
-              visibility={video.visibility}
-              blockVideo={blockVideo}
-              unblockVideo={unblockVideo}
-              isBlocked={video.is_blocked}
-            />
-          ))}
+          {videosFiltered.map(
+            (video) =>
+              ((video.is_blocked && selectedBlocked) || (!video.is_blocked && selectedNotBlocked)) && (
+                <VideoView
+                  key={video.id}
+                  title={video.title}
+                  url={video.url}
+                  id={video.id}
+                  thumb={video.thumb}
+                  description={video.description}
+                  deleteVideo={deleteVideo}
+                  edit
+                  visibility={video.visibility}
+                  blockVideo={blockVideo}
+                  unblockVideo={unblockVideo}
+                  isBlocked={video.is_blocked}
+                />
+              )
+          )}
         </Grid>
       )}
     </Container>

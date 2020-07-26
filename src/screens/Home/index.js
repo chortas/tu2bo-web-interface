@@ -59,16 +59,10 @@ export default function Home({ onLogout, itemSelected }) {
             </Typography>
           </div>
           <div>
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              component={Link}
-              to={ROUTES.Home.path}
-            >
+            <Button variant="outlined" className={classes.button} component={Link} to={ROUTES.Home.path}>
               Inicio
             </Button>
-            <Button variant="outlined" color="secondary" onClick={onLogout} className={classes.button}>
+            <Button variant="outlined" onClick={onLogout} className={classes.button}>
               Logout
             </Button>
           </div>
