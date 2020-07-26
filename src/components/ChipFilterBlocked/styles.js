@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,10 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
   chipSelected: {
     backgroundColor: '#d32f2f !important',
-    color: theme.palette.getContrastText(red[700]),
-    borderColor: red[700],
+    color: '#fff !important',
+    borderColor: '#d32f2f !important',
     marginLeft: '10px',
-    fontSize: '17px',
+    fontSize: '17px !important',
+  },
+  chipNotSelected: {
+    color: '#d32f2f !important',
+    borderColor: '#d32f2f !important',
+    marginLeft: '10px',
+    fontSize: '17px !important',
   },
   chipNotSelected: {
     color: red[700],
